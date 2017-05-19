@@ -13,10 +13,17 @@ namespace CrashMono
         private async Task Run()
         {
             var appDomain = AppDomain.CreateDomain("Test subdomain", null, AppDomain.CurrentDomain.SetupInformation);
-            var driver = (AppDomainTestDriver)appDomain.CreateInstanceAndUnwrap(
-                typeof(AppDomainTestDriver).Assembly.FullName,
-                typeof(AppDomainTestDriver).FullName);
-            driver.Test();
+            try
+            {
+                var driver = (AppDomainTestDriver)appDomain.CreateInstanceAndUnwrap(
+                    typeof(AppDomainTestDriver).Assembly.FullName,
+                    typeof(AppDomainTestDriver).FullName);
+                driver.Test();
+            }
+            finally
+            {
+                AppDomain.Unload(appDomain);
+            }
         }
     }
 
