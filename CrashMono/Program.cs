@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Reflection;
+using Library;
 
 namespace CrashMono
 {
@@ -7,40 +8,40 @@ namespace CrashMono
     {
         static void Main(string[] args)
         {
-            new Program().Run().Wait();
-        }
-
-        private async Task Run()
-        {
-            var appDomain = AppDomain.CreateDomain("Test subdomain", null, AppDomain.CurrentDomain.SetupInformation);
-            try
-            {
-                var driver = (AppDomainTestDriver)appDomain.CreateInstanceAndUnwrap(
-                    typeof(AppDomainTestDriver).Assembly.FullName,
-                    typeof(AppDomainTestDriver).FullName);
-                driver.Test();
-            }
-            finally
-            {
-                AppDomain.Unload(appDomain);
-            }
+            var appDomain = AppDomain.CreateDomain("TestDomain", null, AppDomain.CurrentDomain.SetupInformation);
+            var driver = (Remote)appDomain.CreateInstanceAndUnwrap(
+                typeof(Remote).Assembly.FullName,
+                typeof(Remote).FullName);
+            driver.Test();
         }
     }
 
-    class AppDomainTestDriver : MarshalByRefObject
+    class Remote : MarshalByRefObject
     {
-        static AppDomainTestDriver()
+        static Remote()
         {
+            Console.WriteLine($"cctor in AppDomain {AppDomain.CurrentDomain.FriendlyName}");
+            foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                Console.WriteLine($"{asm.FullName} (in {AppDomain.CurrentDomain.FriendlyName})");
+            }
+
             AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
         }
 
         private static void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
+            //Console.WriteLine($"{args.LoadedAssembly.FullName} loaded into {AppDomain.CurrentDomain.FriendlyName}");
         }
 
         internal void Test()
         {
-            var foo = default(Library.Class1);
+            M<Class1>();
+            //foo.Mbox();
+        }
+
+        private void M<T>()
+        {
         }
     }
 }

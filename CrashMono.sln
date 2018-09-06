@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrashMono", "CrashMono\Cras
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{9262A8F2-FA8A-43A0-8A14-982E8A894BF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CctorTest", "CctorTest\CctorTest.csproj", "{A36C7D6C-2EE0-474A-B5F3-020FDE415E0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9262A8F2-FA8A-43A0-8A14-982E8A894BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9262A8F2-FA8A-43A0-8A14-982E8A894BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9262A8F2-FA8A-43A0-8A14-982E8A894BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A36C7D6C-2EE0-474A-B5F3-020FDE415E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A36C7D6C-2EE0-474A-B5F3-020FDE415E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A36C7D6C-2EE0-474A-B5F3-020FDE415E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A36C7D6C-2EE0-474A-B5F3-020FDE415E0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
